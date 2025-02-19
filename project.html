@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shield GPT</title>
+    <style>
+        * {
+            margin: 1000;
+            padding: 2000;
+            box-sizing:border-box;
+            font-family: 'Georgia', sans-serif;
+        }
+
+        body {
+            font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+            background-color: #fafbfb;
+            background-size: cover;
+            background-image: url(images4.jpg);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 8rem auto;
+            padding: 40px;
+        }
+
+        header {
+            background-color:none;
+            color: #e5f40c;
+            padding: 0px;
+            text-align: center
+        }
+
+        h1 {
+            color: #177fce;
+            margin-bottom: 0.5rem;
+        }
+
+        .detection-box {
+            background: rgb(3, 27, 47);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            border: 2px solid #4c665a;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 16px;
+        }
+
+        button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 20px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            text-align: center;
+        }
+
+        button:hover {
+            background: #000408;
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+        }
+
+        .result.visible {
+            display: block;
+        }
+
+        .fake {
+            background: #ffe6e6;
+            border: 2px solid #ff4444;
+            color: #cc0000;
+        }
+
+        .real {
+            background: #e6ffe6;
+            border: 2px solid #00c851;
+            color: #007e33;
+        }
+
+        .loading {
+            display: none;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .spinner {
+            animation: spin 1s linear infinite;
+            font-size: 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        footer {
+            font-family:  Calibri;
+            font-size: (10px);
+            text-align: center;
+            margin-top: 2rem;
+            color: #aa0a0a
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Powered Fake News Detector.</h1>
+            <p>Verify the authenticity of news articles and social media posts.</p>
+        </header>
+
+        <main>
+            <div class="detection-box">
+                <div class="input-group">
+                    <textarea id="news-input" placeholder="Enter news text or URL here..."></textarea>
+                </div>
+                <button onclick="analyzeNews()">Check Authenticity</button>
+                <div class="loading" id="loading">
+                    <div class="spinner">⏳</div>
+                    <p>Analyzing content...</p>
+                </div>
+                <div id="result" class="result"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 Fake News Detector. Combating misinformation through AI verification.</p>
+        </footer>
+    </div>
+
+    <script>
+        async function analyzeNews() {
+            const input = document.getElementById('news-input').value;
+            const resultDiv = document.getElementById('result');
+            const loading = document.getElementById('loading');
+
+            if (!input) {
+                alert('Please enter some text or a URL to check');
+                return;
+            }
+
+            // Show loading state
+            loading.style.display = 'block';
+            resultDiv.classList.remove('visible');
+
+            // Simulate API call (replace with actual API call)
+            setTimeout(() => {
+                loading.style.display = 'none';
+                
+                // Mock result (replace with actual detection logic)
+                const isFake = Math.random() > 0.5;
+                const confidence = (Math.random() * 100).toFixed(2);
+                
+                resultDiv.className = `result visible ${isFake ? 'fake' : 'real'}`;
+                resultDiv.innerHTML = isFake 
+                    ? `⚠️ Warning: This content appears to be fake (${confidence}% confidence)`
+                    : `✅ This content appears to be authentic (${confidence}% confidence)`;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
